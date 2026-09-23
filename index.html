@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RoDA-Dance</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav><a href="#top" class="brand">RoDA-Dance</a><div><a href="#overview">Overview</a><a href="#method">Method</a><a href="#comparison">Comparison</a><a href="#results">Results</a><a href="#ablation">Ablation</a><a href="#citation">BibTeX</a></div></nav>
+<main id="top">
+<section class="hero shell">
+<h1>RoDA-Dance</h1>
+<h2>Routed and Denoising-Aware<br>Music Conditioning for Dance Video Generation</h2>
+<p class="authors">Meng Wang<sup>1</sup>, Zichao Nie<sup>1</sup>, Xu He<sup>1</sup>, Liyang Chen<sup>1</sup>, Haiwei Xue<sup>3</sup>, Runnan Li<sup>2</sup>, Zhiyong Wu<sup>1</sup></p>
+<p class="affiliations"><sup>1</sup>Tsinghua University &nbsp; <sup>2</sup>Beijing University of Posts and Telecommunications &nbsp; <sup>3</sup>The Hong Kong University of Science and Technology</p>
+<p class="venue">ICASSP 2027</p>
+<div class="links"><a href="#">Paper</a><a href="#">Code</a></div>
+<div class="hero-video video-group" data-group="hero">
+<div class="video wide"><video loop playsinline data-src="assets/demoVideo.mp4"></video><span>demoVideo.mp4</span></div>
+</div>
+</section>
+
+<section id="overview" class="shell section">
+<h3>Overview</h3>
+<div class="abstract-block">
+<p>Music-driven dance video generation requires models to follow semantic instructions, respond to musical dynamics, and preserve visual fidelity. Existing end-to-end methods remain limited by local music modeling, strong audio-motion binding, and imbalanced text-music conditioning across denoising stages.</p>
+<p>We propose a music driven dance video generation framework that effectively models and coordinates music conditioning, improving music-motion coordination, motion diversity, and motion quality while maintaining competitive visual fidelity, subject consistency, and temporal stability.</p>
+</div>
+<div class="keywords"><span>Music to Dance</span><span>Audio-driven video generation</span><span>Diffusion Transformers</span><span>Multimodal conditioning</span></div>
+<div class="info-grid">
+<article><h4>Challenge 1</h4><p>Local music features capture short-term energy and beat onsets, but dance needs segment-level musical context to avoid fragmented or repetitive motion.</p></article>
+<article><h4>Challenge 2</h4><p>Music-to-dance mapping is one-to-many, while standard audio cross-attention can over-bind motion to audio and weaken pretrained video priors.</p></article>
+<article><h4>Challenge 3</h4><p>Text describes high-level semantics and choreographic intent, but text and music can compete differently across denoising stages.</p></article>
+</div>
+</section>
+
+<section id="method" class="shell section"><h3>Method</h3>
+<figure class="pipeline-figure"><img src="assets/pipe.png" alt="RoDA-Dance method pipeline"></figure>
+<div class="method-names">
+<article><h4>Global-Local Music Conditioning</h4><p>Combines local rhythmic cues with segment-level musical context to promote coherent choreography and richer motion dynamics.</p></article>
+<article><h4>Null-Routed Audio Cross-Attention</h4><p>Uses a zero-valued null route to control total audio attention mass while preserving the relative distribution among real audio tokens.</p></article>
+<article><h4>Denoising-Aware Audio Rebalancing</h4><p>Dynamically coordinates text-music guidance across denoising stages for a stronger alignment-quality trade-off.</p></article>
+</div>
+</section>
+
+<section id="comparison" class="shell section">
+<h3>Comparison</h3>
+<div class="cases"><button class="active" data-case="01">01</button><button data-case="02">02</button><button data-case="03">03</button><button data-case="04">04</button><button data-case="05">05</button></div>
+<div class="compare video-group" data-group="comparison">
+<article><h4>MusicInfuser</h4><div class="video"><video loop playsinline data-method="musicinfuser"></video><span>MusicInfuser</span></div></article>
+<article><h4>X-Dancer</h4><div class="video"><video loop playsinline data-method="xdance"></video><span>X-Dancer</span></div></article>
+<article><h4>OmniDance</h4><div class="video"><video loop playsinline data-method="omnidance"></video><span>OmniDance</span></div></article>
+<article><h4>RoDA-Dance</h4><div class="video"><video loop playsinline data-method="roda"></video><span>RoDA-Dance</span></div></article>
+</div>
+</section>
+
+<section id="results" class="shell section"><h3>More Results</h3><div class="gallery video-group" data-group="results">
+<div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_011_wJWARvYHzsPzlyaz_vl.mp4"></video><span>011 wJWARvYHzsPzlyaz</span></div>
+<div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_028_wJhClLrokOFqhIgn_vl.mp4"></video><span>028 wJhClLrokOFqhIgn</span></div>
+<div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_029_wJhnXNlaDGMYjkco_vl.mp4"></video><span>029 wJhnXNlaDGMYjkco</span></div>
+<div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_044_wJqdWKBMuhMcibYr_vl.mp4"></video><span>044 wJqdWKBMuhMcibYr</span></div>
+<div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_020_wJaLwnbQvvvCeWTb_vl.mp4"></video><span>020 wJaLwnbQvvvCeWTb</span></div>
+</div></section>
+
+<section id="ablation" class="shell section"><h3>Ablation</h3><div class="ablation-pairs video-group" data-group="ablation">
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">w/o Global Context</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/globalOff-st5_sa6_009_wJWARvYHzsPzlyaz_vl.mp4"></video><span>w/o Global 009</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_011_wJWARvYHzsPzlyaz_vl.mp4"></video><span>Full 011</span></div></div></div></article>
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">w/o Global Context</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/globalOff-st5_sa6_023_wJgxgwXOUNFoFMTW_vl.mp4"></video><span>w/o Global 023</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_027_wJgxgwXOUNFoFMTW_vl.mp4"></video><span>Full 027</span></div></div></div></article>
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">w/o Routing</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/noRoute-st5_sa6_010_wJWDSjiltNjxXEQM_vl.mp4"></video><span>w/o Routing 010</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_012_wJWDSjiltNjxXEQM_vl.mp4"></video><span>Full 012</span></div></div></div></article>
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">w/o Routing</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/noRoute-st5_sa6_030_wJmABKvxLNIkmKAZ_vl.mp4"></video><span>w/o Routing 030</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_036_wJmABKvxLNIkmKAZ_vl.mp4"></video><span>Full 036</span></div></div></div></article>
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">NotShare Serial</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/noShare-st5_sa6_024_wJhClLrokOFqhIgn_vl.mp4"></video><span>NotShare 024</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_028_wJhClLrokOFqhIgn_vl.mp4"></video><span>Full 028</span></div></div></div></article>
+<article><div class="pair"><div class="ablation-item"><div class="clip-label">NotShare Serial</div><div class="video"><video loop playsinline data-src="assets/raw/ablation/noShare-st5_sa6_028_wJljccKBWGLBNtcI_vl.mp4"></video><span>NotShare 028</span></div></div><div class="ablation-item"><div class="clip-label">Full Model</div><div class="video"><video loop playsinline data-src="assets/raw/S3resume5k-6000_envelope_t5_peak6/st5_sa6_034_wJljccKBWGLBNtcI_vl.mp4"></video><span>Full 034</span></div></div></div></article>
+</div></section>
+
+<section id="citation" class="shell section"><h3>BibTeX</h3><pre>@inproceedings{wang2026roda,
+  title={RoDA-Dance: Routed and Denoising-Aware Music Conditioning for Dance Video Generation},
+  author={Meng Wang, Zichao Nie, Xu He, Liyang Chen, Haiwei Xue, Runnan Li and Zhiyong Wu},
+  booktitle={ICASSP},
+  year={2027}
+}</pre></section>
+</main><footer><strong>RoDA-Dance</strong><span>Contact Us: wang-m26@mails.tsinghua.edu.cn</span></footer><script src="script.js"></script></body></html>
